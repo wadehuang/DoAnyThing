@@ -1,7 +1,13 @@
 # Django settings for allPowerful project.
+import os
+
+PROJECT_DIR = os.getcwd()
+CORE_ADDRESS = '/core'
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
+AUTH_USER_MODEL = "core.UserInfo"
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -11,13 +17,13 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'allPowerful',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+        'USER': 'admin',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '5432',                      # Set to empty string for default.
     }
 }
 
@@ -112,6 +118,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    PROJECT_DIR + CORE_ADDRESS + "/templates"
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -135,7 +142,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
-#    'django.contrib.admindocs',
+    'django.contrib.admindocs',
 
     #Project custom app:
     'core',
