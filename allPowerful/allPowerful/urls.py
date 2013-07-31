@@ -1,3 +1,4 @@
+import settings
 from django.conf.urls import patterns, include, url
 
 # Uncomment the next two lines to enable the admin:
@@ -17,5 +18,9 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('core.views',
+    url(r'^$', 'dashboard', name='dashboard'),
     url(r'^dashboard/$', 'dashboard', name='dashboard')
 )
+
+staticdir = settings.PROJECT_DIR + settings.CORE_ADDRESS + "/static"
+urlpatterns += patterns('', url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': staticdir}), )

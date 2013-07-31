@@ -2,24 +2,107 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>{% block title %}{% endblock %}</title>
+    <title>Do Any Things | {% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+    <script src="//cdnjs.bootcss.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link href="//cdnjs.bootcss.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/base.css" rel="stylesheet">
 </head>
 <body>
 
+
 {% block navbar %}
-    This is nav bar.
+<div class="navbar  navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar">test</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">程序猿的世界</a>
+            <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li class="active">
+                            <a href="/">首页</a>
+                        </li>
+                        <li class="">
+                            <a href="" class="bootstro" data-bootstro-title="身和心必须有一个在路上" data-bootstro-placement="bottom" data-bootstro-step="0">旅行</a>
+                        </li>
+                        <li class="">
+                            <a href="" class="bootstro" data-bootstro-title="了解你朋友的状态。" data-bootstro-placement="bottom" data-bootstro-step="1">了解朋友</a>
+                        </li>
+                        <li class="">
+                            <a href="" class="bootstro" data-bootstro-title="在家靠父母,出门靠朋友" data-bootstro-placement="bottom" data-bootstro-step="2">朋友帮帮忙</a>
+                        </li>
+                        <li>
+                            <a href="" class="bootstro" data-bootstro-title="我们没有时间来寻找爱情,就在这里寻找你的缘分吧。" data-bootstro-placement="bottom" data-bootstro-step="3">爱的速配</a>
+                        </li>
+                        <li class="">
+                            <a href="" class="bootstro" data-bootstro-title="在这里我们一起回忆过去,憧憬未来" data-bootstro-placement="bottom" data-bootstro-step="4">海阔天空</a>
+                        </li>
+
+                    </ul>
+                    <ul class="nav" style="float: right;">
+                        <!--<li><a href="#">注册</a></li>-->
+                        <li><a href="#" data-toggle="modal">登陆</a></li>
+
+                    </ul>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
-{% block content %}
 
-{% endblock %}
 
+<div class="container content" id="container">
+    {% block content %}
+    <div>
+        This is a world.
+    </div>
+    {% endblock %}
+</div>
+
+<footer class="footer">
 {% block footer %}
-    This is footer.
+    <div class="container">
+        <span><a href="#" target="_blank">关于程序猿</a></span>
+        <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+        <span><a href="#" target="_blank">问题反馈</a></span>
+        <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+        <span><a href="#" target="_blank">版本日志</a></span>
+        <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+        <span><a href="#" target="_blank">加入我们</a></span>
+
+        <div>
+            <span>疯狂的程序猿:Wade.Huang</span>
+        </div>
+    </div>
 {% endblock %}
+</footer>
 
 </body>
+
+<script language="javascript" type="text/javascript">
+    window.onload = function(){
+        console.log("test");
+
+        var containerHeight = $("#container").height();
+        var footer = $(".footer");
+        var allHeight = document.documentElement.clientHeight;
+        console.log("Container Height" + containerHeight);
+        console.log("all Height" + allHeight);
+        if(containerHeight < allHeight){
+            console.log("add fixed footer");
+            footer.addClass('fixed_footer');
+        }
+        else{
+            console.log("remove fixed footer");
+            footer.removeClass('fixed_footer');
+        }
+    }
+</script>
 </html>

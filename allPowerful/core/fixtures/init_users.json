@@ -1,22 +1,26 @@
 [
     {
         "pk":1,
-        "model":"auth.user",
+        "model":"core.userinfo",
         "fields":{
             "username":"wade.huang",
-            "first_name":"",
-            "last_name":"",
             "is_active":true,
-            "is_superuser":true,
-            "is_staff":true,
+            "is_admin":true,
             "last_login":"2012-12-13 18:52:28",
-            "groups":[],
-            "user_permissions":[
-
-            ],
             "password":"pbkdf2_sha256$10000$MDQUcjiRpbZO$Egi6NZRWMLhoO+5qlJan+sduXLbz7RT5UKukOCzqxJE=",
-            "email":"wade.huang@xplusz.com",
-            "date_joined":"2011-12-07"
+            "email":"wade.huang@xplusz.com"
+        }
+    },
+    {
+        "pk":2,
+        "model":"core.userinfo",
+        "fields":{
+            "username":"test user",
+            "is_active":true,
+            "is_admin":false,
+            "last_login":"2012-12-13 18:52:28",
+            "password":"pbkdf2_sha256$10000$MDQUcjiRpbZO$Egi6NZRWMLhoO+5qlJan+sduXLbz7RT5UKukOCzqxJE=",
+            "email":"test@xplusz.com"
         }
     }
 ]

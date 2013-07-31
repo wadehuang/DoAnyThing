@@ -146,6 +146,9 @@ INSTALLED_APPS = (
 
     #Project custom app:
     'core',
+
+    #The third party libraries
+    'south'
 )
 
 # A sample logging configuration. The only tangible logging
