@@ -22,5 +22,7 @@ urlpatterns += patterns('core.views',
     url(r'^dashboard/$', 'dashboard', name='dashboard')
 )
 
-staticdir = settings.PROJECT_DIR + settings.CORE_ADDRESS + "/static"
-urlpatterns += patterns('', url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': staticdir}), )
+
+urlpatterns += patterns('',
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_DIR}),
+)

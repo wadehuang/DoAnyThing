@@ -2,7 +2,7 @@
 import os, dj_database_url
 
 PROJECT_DIR = os.getcwd()
-CORE_ADDRESS = '/core'
+CORE_ADDRESS = '/allPowerful/core'
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -182,3 +182,7 @@ LOGGING = {
         },
     }
 }
+
+#
+STATIC_DIR = PROJECT_DIR + CORE_ADDRESS + "/static"
+print STATIC_DIR
