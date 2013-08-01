@@ -1,5 +1,5 @@
 # Django settings for allPowerful project.
-import os
+import os, dj_database_url
 
 PROJECT_DIR = os.getcwd()
 CORE_ADDRESS = '/core'
@@ -15,17 +15,19 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'allPowerful',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': 'admin',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '5432',                      # Set to empty string for default.
-    }
-}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+#        'NAME': 'allPowerful',                      # Or path to database file if using sqlite3.
+#        # The following settings are not used with sqlite3:
+#        'USER': 'admin',
+#        'PASSWORD': 'admin',
+#        'HOST': 'localhost',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+#        'PORT': '5432',                      # Set to empty string for default.
+#    }
+#}
+DATABASES = {'default': dj_database_url.config(default='postgres://admin:admin@localhost/allPowerful')}
+
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -148,7 +150,8 @@ INSTALLED_APPS = (
     'core',
 
     #The third party libraries
-    'south'
+    'south',
+    'gunicorn'
 )
 
 # A sample logging configuration. The only tangible logging

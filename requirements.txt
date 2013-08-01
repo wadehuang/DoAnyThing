@@ -5,3 +5,9 @@ South==0.7.5
 
 # a PostgreSQL database adapter for the Python programming language
 psycopg2==2.4.6
+
+# Reads the DATABASE_URL environment variable and converts it to the configuration dictionary that Django requires
+dj-database-url==0.2.1
+
+# a WSGI HTTP Server for UNIX handle fast clients and sleepy application
+gunicorn==0.17.0
