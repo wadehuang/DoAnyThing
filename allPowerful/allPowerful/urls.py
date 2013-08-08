@@ -18,10 +18,11 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('core.views',
-    url(r'^$', 'dashboard', name='dashboard'),
-    url(r'^dashboard/$', 'dashboard', name='dashboard')
+    url(r'^$', 'index', name='index'),
+    url(r'^index/$', 'index', name='index'),
+    url(r'^login/$', 'login', name='login'),
+    url(r'^register/$', 'register', name='register'),
 )
-
 
 urlpatterns += patterns('',
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_DIR}),

@@ -4,6 +4,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from allPowerful import settings
 
 #   Use south migration tool to generate the migration script.
 #   manage.py schemamigration core --auto
@@ -54,6 +55,11 @@ class UserInfo(AbstractBaseUser):
         (2, u"离异")
     )
 
+    GENDER = (
+        (0, u'男'),
+        (1, u'女'),
+    )
+
     username = models.CharField(_(u'用户名'), max_length=30, unique=True,
         help_text=_('Required. 30 characters or fewer. Letters, numbers and '
                     '@/./+/-/_ characters'))
@@ -65,10 +71,15 @@ class UserInfo(AbstractBaseUser):
     avatar = models.TextField(_(u'头像'), default="")
     #这里为什么用integer类型,减少数据库存储量。本来是需要存储字符串的, 现在只需要存储int类型。
     marital_status = models.IntegerField(_(u'婚姻状况'), choices=MARITAL_STATUS, default=0)
-    is_admin = models.BooleanField(_(u'是否是管理员'), default=False)
+    company = models.CharField(_(u'公司'), blank=True, null=True, max_length=255)
+    city    = models.CharField(_(u'现工作地'), blank=True, null=True, max_length=255)
+    is_admin  = models.BooleanField(_(u'是否是管理员'), default=False)
     is_active = models.BooleanField(_(u'是否是激活状态'), default=False)
     is_online = models.BooleanField(_(u'是否在线'), default=False)
-
+    expert_in = models.CharField(_(u'擅长领域'), max_length=255, default='')
+    gender    = models.IntegerField(_(u'性别'), max_length=2, choices=GENDER, default=0)
+    birthday  = models.CharField(_(u'生日'), max_length=16, null=True, blank=True)
+    industry  = models.CharField(_(u'行业'), max_length=50, null=True, blank=True)
 
     objects = UserInfoManager()
 
@@ -96,3 +107,27 @@ class UserInfo(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
+
+class Friends(BaseModel):
+    """
+    用户和用户之间的朋友关系 我想了很久,想了3个解决方案。
+    1.加一个字段friends在UserInfo表里, 里面是一个UserInfo id 的列表集合.类似这个样子:[1,2,3,4,5,6], 好处可以速度的取出好友的列表集合
+    2.创建一个多对多的关系表. 里面我又分成了2个想法:
+        1).查询的方便,但是会有数据冗余, 互相成为好友的时候,需要加入2条数据。
+           用户-1 -- 用户-2 -- 备注
+           用户-1 -- 用户-3 -- 备注
+           用户-1 -- 用户-4 -- 备注
+           用户-2 -- 用户-1 -- 备注
+           用户-3 -- 用户-1 -- 备注
+           用户-4 -- 用户-1 -- 备注
+        2).减少数据冗余,查询相对麻烦一点
+           用户-1 -- 用户-2 -- 用户备注-1 -- 用户备注-2
+           用户-2 -- 用户-3 -- 用户备注-2 -- 用户备注-3
+           用户-4 -- 用户-3 -- 用户备注-4 -- 用户备注-3
+    3.使用no-sql.
+    根据现有需求的话.我最终决定使用稍微清晰点的设计方案, 第2个想法的第一个解决方案。
+    """
+    user   = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='user_set')
+    friend = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='friends_set')
+    remark = models.CharField(_(u'备注'), blank=True, null=True, max_length=255)
+

@@ -11,3 +11,6 @@ dj-database-url==0.2.1
 
 # a WSGI HTTP Server for UNIX handle fast clients and sleepy application
 gunicorn==0.17.0
+
+#Python Image Lib
+PIL==1.1.7

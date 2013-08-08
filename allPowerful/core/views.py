@@ -4,10 +4,23 @@ from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 
 
-def dashboard(request):
-    print settings.STATIC_DIR
-    return render_to_response('dashboard.html', {}, RequestContext(request,
+def index(request):
+    return render_to_response('index.html', {}, RequestContext(request,
         {
-            'test' : 'hehe'
+
+        })
+    )
+
+def login(request):
+    return render_to_response('login.html', {}, RequestContext(request,
+        {
+
+        })
+    )
+
+def register(request):
+    return render_to_response('register.html', {}, RequestContext(request,
+            {
+
         })
     )
