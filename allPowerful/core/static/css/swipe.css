@@ -1,0 +1,31 @@
+#slider .image {
+    display: block;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.85), inset 0 0 1px rgba(255, 255, 255, 0.35);
+    border-radius: 5px;
+    max-width: 80%;
+    margin-left: 10%;
+    height: inherit;
+}
+
+.swipe {
+    overflow: hidden;
+    visibility: hidden;
+    position: relative;
+    height: 400px;
+}
+.swipe-wrap {
+    overflow: hidden;
+    position: relative;
+    height: 400px;
+}
+.swipe-wrap > div {
+    float:left;
+    width:100%;
+    position: relative;
+    height: 400px;
+}
+
+div img{
+    width: 50px;
+    height: 50px;
+}

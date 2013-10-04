@@ -1,11 +1,83 @@
 {% extends "base.html" %}
 {% block title %}Dashboard{% endblock %}
 {% block content %}
+<link href="/static/css/swipe.css" rel="stylesheet">
+<script src="/static/js/swipe.js"></script>
+
 <div class="container" id="container">
-    <img src="../static/image/Dashboard.jpg"/>
+
+    <div id='slider' class='swipe' style='max-width:100%;margin:0 auto'>
+        <div class='swipe-wrap'>
+            <div>
+            <a class="image" style="background:url('http://img.ivsky.com/img/bizhi/pic/201303/05/sea_food.jpg') center no-repeat;background-size: cover"></a>
+            </div>
+            <div>
+                <a class="image" style="background:url('http://www.ubcicae.com/uploads/1/2/6/9/12699605/99653_orig.jpg') center no-repeat;background-size: cover"></a>
+            </div>
+            <div>
+                <a class="image" style="background:url('http://m1.aboluowang.com/life/data/uploadfile/201109/20110905230202362.jpg') center no-repeat;background-size: cover"></a>
+            </div>
+        </div>
+    </div>
     <div class="row">
-        <div class="span5">这里是公告栏</div>
-        <div class="span5">这里是新闻栏</div>
+        <div class="span6">
+            最热水果:
+            <div>
+                <img src="http://a4.att.hudong.com/11/62/19300001237669130559621227442.jpg">
+                Apple
+            </div>
+            <div>
+                <img src="http://a4.att.hudong.com/11/62/19300001237669130559621227442.jpg">
+                Apple
+            </div>
+            <div>
+                <img src="http://a4.att.hudong.com/11/62/19300001237669130559621227442.jpg">
+                Apple
+            </div>
+            <div>
+                <img src="http://a4.att.hudong.com/11/62/19300001237669130559621227442.jpg">
+                Apple
+            </div>
+            <div>
+                <img src="http://a4.att.hudong.com/11/62/19300001237669130559621227442.jpg">
+                Apple
+            </div>
+        </div>
+        <div class="span6">
+            最热早餐
+            <div>
+                <img src="http://a4.att.hudong.com/11/62/19300001237669130559621227442.jpg">
+                Apple
+            </div>
+            <div>
+                <img src="http://a4.att.hudong.com/11/62/19300001237669130559621227442.jpg">
+                Apple
+            </div>
+            <div>
+                <img src="http://a4.att.hudong.com/11/62/19300001237669130559621227442.jpg">
+                Apple
+            </div>
+            <div>
+                <img src="http://a4.att.hudong.com/11/62/19300001237669130559621227442.jpg">
+                Apple
+            </div>
+            <div>
+                <img src="http://a4.att.hudong.com/11/62/19300001237669130559621227442.jpg">
+                Apple
+            </div>
+        </div>
     </div>
 </div>
+<script type="text/javascript">
+    window.IndexSwipe = new Swipe(document.getElementById('slider'), {
+        startSlide: 1,
+        speed: 400,
+        auto: 3000,
+        continuous: true,
+        disableScroll: false,
+        stopPropagation: false,
+        callback: function(index, elem) {},
+        transitionEnd: function(index, elem) {}
+    });
+</script>
 {% endblock %}
