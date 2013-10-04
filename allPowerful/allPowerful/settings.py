@@ -7,7 +7,7 @@ CORE_ADDRESS = '/allPowerful/core'
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-AUTH_USER_MODEL = "core.UserInfo"
+#AUTH_USER_MODEL = "core.User"
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -173,3 +173,5 @@ LOGGING = {
 
 #Static dir
 STATIC_DIR = PROJECT_DIR + CORE_ADDRESS + "/static"
+
+SESSION_EXPIRE_TIME = 3600

@@ -2,9 +2,9 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Do Any Things | {% block title %}{% endblock %}</title>
+        <title>{% block title %}{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="程序猿的世界">
+        <meta name="description" content="健康早餐">
         <meta name="author" content="wade.huang">
         <script src="//cdnjs.bootcss.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <link href="//cdnjs.bootcss.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet">
@@ -18,30 +18,36 @@
         <div class="navbar  navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
-                    <a class="brand" href="/">程序猿的世界</a>
+                    <a class="brand" href="/">健康早餐</a>
                     <div class="nav-collapse collapse">
                             <ul class="nav">
-                                <li class="active">
+                                <li {% if active == "dashboard" %}class="active" {% endif %}>
                                     <a href="/">首页</a>
                                 </li>
                                 <li class="">
-                                    <a href="" class="bootstro" data-bootstro-title="身和心必须有一个在路上" data-bootstro-placement="bottom" data-bootstro-step="0">旅行</a>
+                                    <a href="" class="bootstro" data-bootstro-title="身和心必须有一个在路上" data-bootstro-placement="bottom" data-bootstro-step="0">营养早餐</a>
                                 </li>
                                 <li class="">
-                                    <a href="" class="bootstro" data-bootstro-title="了解你朋友的状态。" data-bootstro-placement="bottom" data-bootstro-step="1">了解朋友</a>
+                                    <a href="" class="bootstro" data-bootstro-title="了解你朋友的状态。" data-bootstro-placement="bottom" data-bootstro-step="1">新鲜水果</a>
                                 </li>
-                                <li class="">
-                                    <a href="" class="bootstro" data-bootstro-title="在家靠父母,出门靠朋友" data-bootstro-placement="bottom" data-bootstro-step="2">朋友帮帮忙</a>
-                                </li>
-                                <li>
-                                    <a href="" class="bootstro" data-bootstro-title="我们没有时间来寻找爱情,就在这里寻找你的缘分吧。" data-bootstro-placement="bottom" data-bootstro-step="3">爱的速配</a>
-                                </li>
-                                <li class="">
-                                    <a href="" class="bootstro" data-bootstro-title="在这里我们一起回忆过去,憧憬未来" data-bootstro-placement="bottom" data-bootstro-step="4">海阔天空</a>
-                                </li>
+                                <!--<li class="">-->
+                                    <!--<a href="" class="bootstro" data-bootstro-title="在家靠父母,出门靠朋友" data-bootstro-placement="bottom" data-bootstro-step="2">朋友帮帮忙</a>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                    <!--<a href="" class="bootstro" data-bootstro-title="我们没有时间来寻找爱情,就在这里寻找你的缘分吧。" data-bootstro-placement="bottom" data-bootstro-step="3">爱的速配</a>-->
+                                <!--</li>-->
+                                <!--<li class="">-->
+                                    <!--<a href="" class="bootstro" data-bootstro-title="在这里我们一起回忆过去,憧憬未来" data-bootstro-placement="bottom" data-bootstro-step="4">海阔天空</a>-->
+                                <!--</li>-->
                             </ul>
                             <ul class="nav" style="float: right;">
-                                <li><a href="#" data-toggle="modal">登陆</a></li>
+                                {% if not user.is_active %}
+                                    <li><a href="{% url 'login' %}">登陆</a></li>
+                                    <li><a href="{% url 'register' %}">注册</a></li>
+                                {% else %}
+                                    <li><a>Hi, {{ user.username }}</a></li>
+                                    <li><a href="{% url 'logout' %}">退出</a></li>
+                                {% endif %}
                             </ul>
                     </div>
                 </div>

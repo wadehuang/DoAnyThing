@@ -2,6 +2,41 @@
 {% block title %}Register{% endblock %}
 {% block content %}
 
-        This is Register Page....
+<div id="register" class="container">
+
+    <div id="login-section" class="section section-large">
+        <div class="section-header">
+            <h3> 注册早餐网 </h3>
+        </div>
+        <div class="section-content">
+            {% if is_success %}
+                <div class="alert alert-success">注册成功!</div>
+            {% endif %}
+            {% if user_form.errors %}
+                <div class="alert alert-error">{{ user_form.errors }}</div>
+            {% endif %}
+            <div id="login_tips"></div>
+            <form method="post" action="{% url 'register' %}" accept-charset="UTF-8">
+                {% csrf_token %}
+                <div class="row-fluid">
+                    <label for="username">用户名</label>
+                    {{ user_form.username }}
+                    <!--<input id="username" class="span12" type="text" size="30" name="username">-->
+                    <label for="password">密码</label>
+                    {{ user_form.password }}
+                    <!--<input id="password" class="span12" type="password" size="30" name="password">-->
+                </div>
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="span2" style="width:65px">
+                            <input class="btn btn-primary" type="submit" value="注册" name="commit">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}
