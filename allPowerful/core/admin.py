@@ -3,6 +3,13 @@ from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from core.models import Item, UserAddress, Order, OrderDetails, Dispatching
+
+admin.site.register(Item)
+admin.site.register(UserAddress)
+admin.site.register(Order)
+admin.site.register(OrderDetails)
+admin.site.register(Dispatching)
 
 #from core.models import UserInfo
 

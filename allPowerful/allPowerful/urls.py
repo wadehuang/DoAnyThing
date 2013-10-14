@@ -26,6 +26,20 @@ urlpatterns += patterns('core.views',
     url(r'^reset_password/$', 'reset_password', name='reset_password'),
 )
 
+urlpatterns += patterns('core.controllers.items',
+    url(r'^items/(?P<item_type>\w+)/(?P<id>\d+)/$', 'item_details', name='item_details'),
+    url(r'^items/(?P<item_type>\w+)/index/$', 'forward_item_page', name='item')
+)
+
+urlpatterns += patterns('core.controllers.orders',
+    url(r'^order_list/$', 'order_list', name='order_list'),
+    url(r'^order_details/$', 'order_details', name='order_details')
+)
+
+urlpatterns += patterns('core.controllers.user',
+    url(r'^user_details/$', 'user_details', name='user_details')
+)
+
 urlpatterns += patterns('',
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_DIR}),
 )

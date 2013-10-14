@@ -123,6 +123,13 @@ class UserProfile(BaseModel):
         (1, u'女'),
     )
 
+    USER_TYPE = (
+        (0, u'配送员'),
+        (1, u'区域管理员'),
+        (2, u'总管理员'),
+        (3, u'普通用户')
+    )
+
     user = models.OneToOneField(User)
     nickname = models.CharField(_(u'昵称'), max_length=100, default="")
     date_joined = models.DateTimeField(_(u'加入时间'), default=timezone.now)
@@ -139,7 +146,8 @@ class UserProfile(BaseModel):
     gender    = models.IntegerField(_(u'性别'), max_length=2, choices=GENDER, default=0)
     birthday  = models.CharField(_(u'生日'), max_length=16, null=True, blank=True)
     industry  = models.CharField(_(u'行业'), max_length=50, null=True, blank=True)
-    tel_number = models.IntegerField(_(u'电话号码'))
+    tel_number = models.IntegerField(_(u'电话号码'), null=True, blank=True)
+    user_type  = models.IntegerField(_(u'用户类型'), choices=USER_TYPE, default=3)
 
 class Friends(BaseModel):
     """
@@ -189,7 +197,7 @@ class UserAddress(BaseModel):
     user           = models.ForeignKey(User, null=True, blank=True)
     user_address   = models.TextField()
     recipient_name = models.CharField(max_length=256)
-    tel_number     = models.IntegerField()
+    tel_number     = models.CharField(max_length=25)
     comment        = models.TextField(default="")
 
 
@@ -198,13 +206,35 @@ class Order(BaseModel):
         用户的订单表
     """
     order_id         = models.IntegerField(_(u'订单号'))
-    item_quantity    = models.IntegerField(_(u'物品数量'), default=1)
-    item             = models.ForeignKey(Item)
     user             = models.ForeignKey(User)
     is_send          = models.BooleanField(_(u'是否已送到'), default=False)
     comment          = models.TextField(default="")
     price            = models.FloatField(_(u'当次配送物品金额'), default=0.0)
     dispatching_cost = models.FloatField(_(u"配送费用"), default=0.0)
     user_address     = models.ForeignKey(UserAddress)
+    #TODO 只要几点,比如 8：00, 那么早餐需在8点前送达。误差不能超过多久。
+    dispatching_time = models.TimeField(_(u'配送时间'))
+    #用户可以选择 定多久的套餐. 从几号到几号，比如 2013-1.10~2013-1.20
+    order_from_time  = models.DateField(_(u'订单起始日'), auto_now_add=True)
+    order_to_time    = models.DateField(_(u'订单截止日'), auto_now_add=True)
 
+    def __unicode__(self):
+        return u"订单" + str(self.order_id)
+
+class OrderDetails(BaseModel):
+    """
+        用户订单详细
+    """
+    order         = models.ForeignKey(Order)
+    item          = models.ForeignKey(Item)
+    item_quantity = models.IntegerField(_(u'物品数量'), default=1)
+    comment       = models.TextField(default="")
+
+class Dispatching(BaseModel):
+    """
+        配送区域分配, 可支持配送区域，区域负责人
+    """
+    name = models.CharField(_(u'区域名字'), max_length=256)
+    #区域负责人
+    user = models.ForeignKey(User, null=True, blank=True)
 
