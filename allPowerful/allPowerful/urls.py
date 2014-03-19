@@ -24,6 +24,7 @@ urlpatterns += patterns('core.views',
     url(r'^logout/$', 'logout', name='logout'),
     url(r'^register/$', 'register', name='register'),
     url(r'^reset_password/$', 'reset_password', name='reset_password'),
+    url(r'^location/$', 'get_ip_address', name='get_ip_address')
 )
 
 urlpatterns += patterns('core.controllers.items',
@@ -39,6 +40,8 @@ urlpatterns += patterns('core.controllers.orders',
 urlpatterns += patterns('core.controllers.user',
     url(r'^user_details/$', 'user_details', name='user_details')
 )
+
+urlpatterns += patterns('core.controller.')
 
 urlpatterns += patterns('',
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_DIR}),

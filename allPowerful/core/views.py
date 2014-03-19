@@ -3,11 +3,13 @@
 # Create your views here.
 from allPowerful import settings
 from django.contrib.auth import authenticate
+from django.http import HttpResponse
 from django.shortcuts import render_to_response, redirect
 from django.template.context import RequestContext
 from core.forms.forms import LoginForm, UserForm
 from core.tools.utils import get_next_url
 from django.contrib.auth.models import AnonymousUser
+import json
 
 
 def index(request):
@@ -78,3 +80,11 @@ def register(request):
 
 def reset_password(request):
     pass
+
+
+def get_ip_address(request):
+
+    remote_addr = request.META.get("REMOTE_ADDR", None)
+    x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR", None)
+    dict = {'remote_addr': remote_addr, 'x_forwarded_for':x_forwarded_for}
+    return HttpResponse(json.dumps(dict))
